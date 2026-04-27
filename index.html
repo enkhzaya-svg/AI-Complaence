@@ -20,7 +20,7 @@
             display: none;
             height: 100vh;
             width: 100vw;
-            padding: 3rem;
+            padding: 3rem 6rem; /* Side padding increased to prevent overlap with nav buttons */
             box-sizing: border-box;
             opacity: 0;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,34 +90,41 @@
             z-index: 1000;
         }
 
-        .controls {
+        /* Side Navigation Buttons */
+        .nav-side-btn {
             position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
             background: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f1f5f9;
-            z-index: 100;
-        }
-
-        .nav-btn {
-            color: #64748b;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.2s;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            color: #64748b;
         }
 
-        .nav-btn:hover {
+        .nav-side-btn:hover {
             color: #2563eb;
+            border-color: #2563eb;
+            transform: translateY(-50%) scale(1.1);
+            background: #eff6ff;
         }
+
+        .nav-side-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .nav-left { left: 1.5rem; }
+        .nav-right { right: 1.5rem; }
 
         /* Icon Animation Styles */
         .icon-container {
@@ -218,6 +225,14 @@
 
     <div class="progress-indicator" id="progressIndicator"></div>
 
+    <!-- Side Navigation -->
+    <div class="nav-side-btn nav-left" id="prevBtn" onclick="prevSlide()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+    </div>
+    <div class="nav-side-btn nav-right" id="nextBtn" onclick="nextSlide()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+
     <!-- Slide 1: Welcome -->
     <section class="slide active" id="slide1">
         <div class="max-w-5xl text-center animate-in">
@@ -262,8 +277,8 @@
                             <path d="M8 13h4M8 17h8" stroke-opacity="0.3" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">AI-р шалгууруудыг тодорхойлох</h3>
-                    <p class="text-xs text-slate-500 px-2">PDF байршуулахад AI түүнийг уншиж, шалгуур үзүүлэлтүүдийн жагсаалтыг бэлтгэнэ.</p>
+                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">AI-р шалгууруудыг тодорхойлох</h3>
+                    <p class="text-[10px] text-slate-500 leading-normal">PDF-ээр байршуулахад AI түүнийг уншиж, шалгуур үзүүлэлтүүдийн жагсаалтыг бэлтгэнэ.</p>
                 </div>
 
                 <!-- Step 2 -->
@@ -282,8 +297,8 @@
                             <line class="connection-line" x1="7" y1="17" x2="10.5" y2="13.5" stroke-opacity="0.5" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Шинжилгээнд ашиглах баримт бичгээ оруулах</h3>
-                    <p class="text-xs text-slate-500 px-2">Нотлох баримтуудаа оруулах эсвэл платформ дээрх бодит өгөгдлүүдээ холбоно.</p>
+                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Шинжилгээнд ашиглах баримт бичгээ оруулах</h3>
+                    <p class="text-[10px] text-slate-500 leading-normal">Нотлох баримтуудаа оруулах эсвэл платформ дээрх бодит өгөгдлүүдээ холбоно.</p>
                 </div>
 
                 <!-- Step 3 -->
@@ -305,8 +320,8 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Үнэлгээ</h3>
-                    <p class="text-xs text-slate-500 px-2">AI нь нотлох баримт бүрийг харьцуулж, нийцлийн хувь болон Gap-ийг тодорхойлно.</p>
+                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Үнэлгээ</h3>
+                    <p class="text-[10px] text-slate-500 leading-normal">AI нь нотлох баримт бүрийг харьцуулж, нийцлийн хувь болон Gap-ийг тодорхойлно.</p>
                 </div>
 
                 <!-- Step 4 -->
@@ -321,8 +336,8 @@
                             <path class="check-mark text-blue-500" d="M16 10l2 2 4-4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Автомат ажлын төлөвлөгөө</h3>
-                    <p class="text-xs text-slate-500 px-2">Дутагдлыг засах зөвлөмжийг боловсруулж, Task болгон нэмнэ.</p>
+                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Автомат ажлын төлөвлөгөө</h3>
+                    <p class="text-[10px] text-slate-500 leading-normal">Дутагдлыг засах зөвлөмжийг боловсруулж, Task болгон нэмнэ.</p>
                 </div>
             </div>
         </div>
@@ -420,20 +435,20 @@
         </div>
     </section>
 
-    <!-- Slide 5: Final Contact - UPDATED CTA -->
+    <!-- Slide 5: Final Contact -->
     <section class="slide" id="slide5">
         <div class="text-center animate-in">
             <div class="inline-block p-5 bg-blue-50 rounded-full mb-8 floating">
                 <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
-            <h2 class="text-6xl font-black mb-8 leading-tight">Эрсдэлийг зардалд бус,<br><span class="text-gradient">үнэ цэнд шилжүүл.</span></h2>
+            <h2 class="text-6xl font-black mb-8 leading-tight text-gradient">Эрсдэлийг зардалд бус,<br>үнэ цэнд шилжүүл.</h2>
             
             <div class="mt-12 flex flex-col items-center gap-6">
                 <a href="https://mn.tuss.io/get-demo-mn" target="_blank" class="flex items-center gap-4 bg-white px-10 py-5 rounded-3xl shadow-2xl border border-blue-50 hover:scale-105 transition-all pulse-blue">
                     <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <span class="text-3xl font-black text-blue-600 px-4">Уулзалт товлох, мэдээлэл авах</span>
+                    <span class="text-2xl font-black text-blue-600 px-4">Уулзалт товлох, мэдээлэл авах</span>
                 </a>
                 <div class="flex flex-col gap-2 mt-4">
                     <div class="text-xl font-bold text-slate-600">+976 7014 9761</div>
@@ -447,31 +462,27 @@
         </div>
     </section>
 
-    <div class="controls">
-        <div class="nav-btn" onclick="prevSlide()">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"></path></svg>
-            Өмнөх
-        </div>
-        <div class="w-px h-6 bg-slate-200"></div>
-        <div class="nav-btn" onclick="nextSlide()">
-            Дараах
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
-        </div>
-    </div>
-
     <script>
         let currentSlide = 1;
         const totalSlides = 5;
 
         function updateSlide() {
+            // Hide all slides
             document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            
+            // Show active slide
             const activeSlide = document.getElementById(`slide${currentSlide}`);
             activeSlide.classList.add('active');
             
+            // Update progress bar
             const progress = (currentSlide / totalSlides) * 100;
             document.getElementById('progressIndicator').style.width = `${progress}%`;
 
-            // Trigger score ring animation on slide 2
+            // Update button states
+            document.getElementById('prevBtn').classList.toggle('disabled', currentSlide === 1);
+            document.getElementById('nextBtn').classList.toggle('disabled', currentSlide === totalSlides);
+
+            // Analysis ring animation
             if (currentSlide === 2) {
                 const ring = document.getElementById('scoreRing');
                 if (ring) {
@@ -482,7 +493,7 @@
                 }
             }
 
-            // Restart in-animations
+            // Restart animations
             const animatedElements = activeSlide.querySelectorAll('.animate-in');
             animatedElements.forEach(el => {
                 el.style.animation = 'none';
