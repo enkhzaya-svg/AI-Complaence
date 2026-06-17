@@ -20,10 +20,11 @@
             display: none;
             height: 100vh;
             width: 100vw;
-            padding: 3rem 6rem; /* Side padding increased to prevent overlap with nav buttons */
+            padding: 2rem 6rem; /* Side padding to prevent overlap with nav buttons */
             box-sizing: border-box;
             opacity: 0;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto; /* Enable internal scrolling on small screens */
         }
 
         .slide.active {
@@ -345,53 +346,95 @@
 
     <!-- Slide 3: Additional Solutions -->
     <section class="slide" id="slide3">
-        <div class="max-w-6xl w-full px-4">
-            <div class="inline-block px-4 py-1 bg-blue-600 text-white rounded-full font-bold text-xs mb-4 uppercase tracking-widest mx-auto block w-max">Unlimited AI Toolbox</div>
-            <h2 class="text-3xl font-extrabold mb-12 text-center leading-tight">Дүрэм, журам эрх зүйн актыг шинжлэх<br><span class="text-blue-600">нэмэлт шийдлүүд</span></h2>
+        <div class="max-w-7xl w-full px-6 py-4">
+            <div class="inline-block px-4 py-1 bg-blue-600 text-white rounded-full font-bold text-xs mb-3 uppercase tracking-widest mx-auto block w-max">Unlimited AI Toolbox</div>
+            <h2 class="text-3xl font-extrabold mb-8 text-center leading-tight">Дүрэм, журам эрх зүйн актыг шинжлэх<br><span class="text-blue-600">нэмэлт шийдлүүд</span></h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <!-- Updated Grid to support 7 cards beautifully (from image_9723fe.png style) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                
+                <!-- NEW ADDED CARD: Contract Quality Analysis -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px] border-2 border-blue-500/20">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3 3L22 4" class="text-emerald-500 group-hover:text-emerald-200"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2 group-hover:text-white text-blue-900">Гэрээний чанарын шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">
+                            Гэрээний эрсдэлийг үнэлж, нээлттэй сангаас харилцагчийн түүхийг шалган
+                        </p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Чанарын шинжилгээ</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Хугацаа, субьектив, хариуцах эзэн гэх мэтээр эрсдэлүүдийг шинжилнэ.</p>
                 </div>
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+
+                <!-- Card 1 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Чанарын шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Хугацаа, субьектив, хариуцах эзэн гэх мэтээр эрсдэлүүдийг шинжилнэ.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Нийцлийн шинжилгээ</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Хоёр баримтын зөрүүг илрүүлж, хуулийн нийцлийг хянана.</p>
                 </div>
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+
+                <!-- Card 2 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Нийцлийн шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Хоёр баримтын зөрүүг илрүүлж, хуулийн нийцлийг хянана.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Нөлөөллийн шинжилгээ</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Хуулийн өөрчлөлтөөс үүсэх эрсдэл, боломжийг шинжилнэ.</p>
                 </div>
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+
+                <!-- Card 3 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Нөлөөллийн шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Хуулийн өөрчлөлтөөс үүсэх эрсдэл, боломжийг шинжилнэ.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Дүрэм журам боловсруулах</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Байгууллагын онцлогт тохирсон мэргэжлийн драфтыг бэлтгэнэ.</p>
                 </div>
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+
+                <!-- Card 4 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Дүрэм журам боловсруулах</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Байгууллагын онцлогт тохирсон мэргэжлийн драфтыг бэлтгэнэ.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Хүний эрхийн шинжилгээ</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Үндсэн хуулийн 16-р зүйлд заасан МУ-н иргэдийн 18 эрх, эрх чөлөөтэй харьцуулна.</p>
                 </div>
-                <div class="group card-light p-6 hover:bg-blue-600 hover:text-white">
-                    <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+
+                <!-- Card 5 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Хүний эрхийн шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Үндсэн хуулийн 16-р зүйлд заасан МУ-н иргэдийн 18 эрх, эрх чөлөөтэй харьцуулна.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Доголдол засварлах</h3>
-                    <p class="text-sm text-slate-500 group-hover:text-blue-100">Сайжруулах зөвлөмжийн дагуу алдааг засварлах хувилбар санал болгоно.</p>
                 </div>
+
+                <!-- Card 6 -->
+                <div class="group card-light p-5 hover:bg-blue-600 hover:text-white flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-base mb-2">Доголдол засварлах</h3>
+                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-relaxed">Сайжруулах зөвлөмжийн дагуу алдааг засварлах хувилбар санал болгоно.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -505,9 +548,28 @@
         function nextSlide() { if (currentSlide < totalSlides) { currentSlide++; updateSlide(); } }
         function prevSlide() { if (currentSlide > 1) { currentSlide--; updateSlide(); } }
 
+        // Keyboard support
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch gesture support (Swipe support)
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        function handleGesture() {
+            if (touchendX < touchstartX - 50) nextSlide();
+            if (touchendX > touchstartX + 50) prevSlide();
+        }
+        
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleGesture();
         });
 
         updateSlide();
