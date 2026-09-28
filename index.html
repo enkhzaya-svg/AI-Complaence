@@ -36,20 +36,20 @@
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
-            padding: 1.5rem 1rem 7.5rem 1rem;
+            padding: 1.5rem 1rem 7rem 1rem;
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
         }
 
         @media (min-width: 768px) {
             .slide {
-                padding: 2.5rem 4rem 6.5rem 4rem;
+                padding: 2.5rem 3rem 6.5rem 3rem;
             }
         }
 
         @media (min-width: 1280px) {
             .slide {
-                padding: 3rem 6rem 6.5rem 6rem;
+                padding: 3rem 5rem 6.5rem 5rem;
             }
         }
 
@@ -64,7 +64,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            max-width: 82rem;
+            max-width: 84rem;
             margin: 0 auto;
             width: 100%;
         }
@@ -94,8 +94,8 @@
         }
 
         .step-circle {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             background: #eff6ff;
             color: #2563eb;
             border: 2px solid #bfdbfe;
@@ -204,7 +204,7 @@
             pointer-events: none;
         }
 
-        /* Modal System: default hidden */
+        /* Modal System: Default hidden */
         .modal-backdrop {
             display: none;
             position: fixed;
@@ -507,55 +507,55 @@
                     </button>
                 </div>
 
-                <!-- Tool 3: Баримт бичгийн нийцлийн шинжилгээ -->
-                <div class="card-light p-3.5 flex flex-col justify-between hover:border-blue-500">
+                <!-- Tool 3: Баримт бичгийн нийцлийн шинжилгээ (Interactive PDF) -->
+                <div class="card-light p-3.5 flex flex-col justify-between border-blue-400 bg-gradient-to-b from-blue-50/40 to-white shadow-sm hover:border-blue-600">
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
-                            <span class="text-[10px] font-extrabold text-slate-300">03</span>
+                            <span class="text-[9px] font-black text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded uppercase">PDF</span>
                         </div>
-                        <h3 class="font-bold text-xs sm:text-sm text-slate-800 leading-snug mb-1">Баримт бичгийн нийцлийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 leading-relaxed">Хоёр баримтын зөрүүг илрүүлж, хууль эрх зүйн нийцлийг нарийвчлан хянана.</p>
+                        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug mb-1">Баримт бичгийн нийцлийн шинжилгээ</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">Хууль тогтоомжтой харьцуулан зөрчил, хийдлийг заалт бүрээр тулган шалгана.</p>
                     </div>
-                    <div class="text-[10px] font-bold text-blue-600 pt-2 border-t border-slate-50 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> AI Модуль
-                    </div>
+                    <button type="button" onclick="openDocCompModal()" class="w-full py-1.5 px-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-lg text-[10px] font-bold text-center transition-all cursor-pointer mt-2">
+                        Дэлгэрэнгүй үзэх ↗
+                    </button>
                 </div>
 
-                <!-- Tool 4: Баримт бичгийн салбарын нөлөөллийн шинжилгээ -->
-                <div class="card-light p-3.5 flex flex-col justify-between hover:border-blue-500">
+                <!-- Tool 4: Баримт бичгийн салбарын нөлөөллийн шинжилгээ (Interactive PDF) -->
+                <div class="card-light p-3.5 flex flex-col justify-between border-blue-400 bg-gradient-to-b from-blue-50/40 to-white shadow-sm hover:border-blue-600">
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                             </div>
-                            <span class="text-[10px] font-extrabold text-slate-300">04</span>
+                            <span class="text-[9px] font-black text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded uppercase">PDF</span>
                         </div>
-                        <h3 class="font-bold text-xs sm:text-sm text-slate-800 leading-snug mb-1">Баримт бичгийн салбарын нөлөөлөл</h3>
-                        <p class="text-[11px] text-slate-500 leading-relaxed">Хуулийн өөрчлөлтөөс үүсэх салбарын эрсдэл, бизнесийн үр дагаврыг тооцно.</p>
+                        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug mb-1">Баримт бичгийн салбарын нөлөөлөл</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">Хуулийн өөрчлөлтөөс үүсэх салбарын эрсдэл, бизнесийн үр дагаврыг урьдчилан тооцно.</p>
                     </div>
-                    <div class="text-[10px] font-bold text-blue-600 pt-2 border-t border-slate-50 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> AI Модуль
-                    </div>
+                    <button type="button" onclick="openSalbarModal()" class="w-full py-1.5 px-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-lg text-[10px] font-bold text-center transition-all cursor-pointer mt-2">
+                        Дэлгэрэнгүй үзэх ↗
+                    </button>
                 </div>
 
-                <!-- Tool 5: Баримт бичгийн доголдлыг засварлах -->
-                <div class="card-light p-3.5 flex flex-col justify-between hover:border-blue-500">
+                <!-- Tool 5: Баримт бичгийн доголдлыг засварлах (Interactive PDF) -->
+                <div class="card-light p-3.5 flex flex-col justify-between border-blue-400 bg-gradient-to-b from-blue-50/40 to-white shadow-sm hover:border-blue-600">
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                             </div>
-                            <span class="text-[10px] font-extrabold text-slate-300">05</span>
+                            <span class="text-[9px] font-black text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded uppercase">PDF</span>
                         </div>
-                        <h3 class="font-bold text-xs sm:text-sm text-slate-800 leading-snug mb-1">Баримт бичгийн доголдлыг засах</h3>
-                        <p class="text-[11px] text-slate-500 leading-relaxed">Сайжруулах зөвлөмжийн дагуу хууль зүйн найруулгын бэлэн хувилбар бэлтгэнэ.</p>
+                        <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug mb-1">Баримт бичгийн доголдлыг засах</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">Илэрсэн алдаа зөрчлийг нэгтгэн, хууль зүйн дагуу бэлэн найруулгын хувилбар бэлтгэнэ.</p>
                     </div>
-                    <div class="text-[10px] font-bold text-blue-600 pt-2 border-t border-slate-50 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> AI Модуль
-                    </div>
+                    <button type="button" onclick="openDogoldolModal()" class="w-full py-1.5 px-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-lg text-[10px] font-bold text-center transition-all cursor-pointer mt-2">
+                        Дэлгэрэнгүй үзэх ↗
+                    </button>
                 </div>
 
                 <!-- Tool 6: Гэрээний чанарын шинжилгээ -->
@@ -1140,7 +1140,370 @@
         </div>
     </div>
 
-    <!-- MODAL 4: Dynamic Tutorial Video Modal (Supports Gap Analysis & Human Rights videos) -->
+    <!-- MODAL 4: DocumentComplianceOfficial.pdf Modal -->
+    <div id="docCompModal" class="modal-backdrop" onclick="handleDocCompBackdrop(event)">
+        <div class="modal-card">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50/90">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-black uppercase tracking-wider">PDF Танилцуулга</span>
+                    <span class="text-xs font-bold text-slate-700 truncate max-w-[200px] sm:max-w-md">Баримт бичгийн нийцлийн шинжилгээ</span>
+                </div>
+                <button type="button" onclick="closeDocCompModal()" class="w-8 h-8 rounded-full bg-slate-200/80 hover:bg-slate-300 active:scale-95 flex items-center justify-center text-slate-600 transition-colors cursor-pointer border-none font-bold text-sm" aria-label="Хаах">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Modal Content (Pages 1 to 4) -->
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 min-h-[320px]">
+                <!-- Doc Comp Page 1 -->
+                <div class="book-page active" id="docCompPage1">
+                    <div class="text-center py-2">
+                        <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 1 / 4 • Юу хийж чадах вэ?</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2 mb-2">Хиймэл оюунд суурилсан баримт бичгийн нийцлийн шинжилгээ</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed mt-2 mb-4">
+                            Энэхүү шинжилгээ нь байгууллагын дотоод дүрэм, журам, гэрээ, зааврууд нь хууль тогтоомж, дээд шатны дүрэм, заавал дагаж мөрдөх эрх зүйн актуудыг зөрчиж байгаа эсэхийг заалт бүрээр нь нарийвчлан шалгадаг шийдэл юм.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-left max-w-md mx-auto">
+                            <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs">
+                                <div class="font-bold text-blue-700">Шалгалтын хэлбэр</div>
+                                <div class="text-slate-500 mt-0.5">Заалт тус бүрээр тулган харьцуулна</div>
+                            </div>
+                            <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs">
+                                <div class="font-bold text-blue-700">Эрх зүйн эх сурвалж</div>
+                                <div class="text-slate-500 mt-0.5">Хүчин төгөлдөр хууль, дээд актууд</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc Comp Page 2 -->
+                <div class="book-page" id="docCompPage2">
+                    <div class="py-2 text-center">
+                        <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 2 / 4 • Харьцуулан шалгах</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2 mb-3">Хуулийн хэм хэмжээтэй тулган шалгана</h3>
+                        <p class="text-xs text-slate-600 max-w-lg mx-auto leading-relaxed mb-4">
+                            Дотоод баримт бичгийн заалтуудыг хүчин төгөлдөр мөрдөгдөж буй хууль тогтоомж (Хөдөлмөрийн хууль, Компанийн тухай хууль, Салбарын дүрэм журам г.м)-той харьцуулан хянана.
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-bold text-slate-700 max-w-md mx-auto">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">Гэрээ</div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">Журам</div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">Дүрэм</div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">Тайлан</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc Comp Page 3 -->
+                <div class="book-page" id="docCompPage3">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 3 / 4 • Үр дүн & Засвар</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Үр дүн 5 минутад: Ангилал ба Зөвлөмж</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs mb-3">
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl">
+                                <span class="font-black text-rose-700 block mb-0.5">✕ Шууд зөрчил</span>
+                                <p class="text-[11px] text-rose-800">Хуульд заасан хоригийг зөрчсөн, хүчингүй болох заалтууд.</p>
+                            </div>
+                            <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl">
+                                <span class="font-black text-amber-700 block mb-0.5">! Болзошгүй эрсдэл</span>
+                                <p class="text-[11px] text-amber-800">Хуулийн агуулгыг дутуу, буруу тайлбарласан заалтууд.</p>
+                            </div>
+                            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+                                <span class="font-black text-emerald-700 block mb-0.5">✓ Нийцсэн</span>
+                                <p class="text-[11px] text-emerald-800">Хуулийн шаардлагад бүрэн нийцсэн заалтууд.</p>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-slate-700">
+                            <span class="font-black text-blue-700 block mb-0.5">Засвар зөвлөмж санал болгоно:</span>
+                            Зөрчилтэй заалт бүрийг хуульд нийцүүлэн хэрхэн найруулан өөрчлөх бэлэн хувилбарыг tuss.io боловсруулж өгнө.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doc Comp Page 4 -->
+                <div class="book-page" id="docCompPage4">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 4 / 4 • Үнэ цэнэ</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Байгууллагад бий болох бодит үнэ цэнэ</h3>
+                        </div>
+                        <div class="space-y-2.5 max-w-lg mx-auto mt-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Хууль зүйн эрсдэлээс хамгаална:</span>
+                                <p class="text-slate-600">Хууль бус заалтаас болж үүсэх шүүхийн маргаан, торгууль, нөхөн төлбөрөөс урьдчилан сэргийлнэ.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Хуулийн өөрчлөлтийг цаг алдалгүй тусгана:</span>
+                                <p class="text-slate-600">Хууль шинэчлэгдэх бүрд хуучин журмаа хэдхэн минутад тулган шалгаж, шинэчлэх боломжтой.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Бэлэн найруулгын хувилбар өгнө:</span>
+                                <p class="text-slate-600">Хууль зөрчсөн хэсгийг хуульд нийцсэн зөв үг хэллэгээр шинэчлэн бэлтгэж өгнө.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 bg-slate-50/90">
+                <button type="button" onclick="prevDocCompPage()" id="prevDocCompBtn" class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 disabled:opacity-40 cursor-pointer">
+                    ← Өмнөх хуудас
+                </button>
+                <span class="text-xs font-black text-blue-600" id="docCompPageIndicator">1 / 4</span>
+                <button type="button" onclick="nextDocCompPage()" id="nextDocCompBtn" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 disabled:opacity-40 cursor-pointer">
+                    Дараах хуудас →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: Salbariin-nuluulul.pdf Modal -->
+    <div id="salbarModal" class="modal-backdrop" onclick="handleSalbarBackdrop(event)">
+        <div class="modal-card">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50/90">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-black uppercase tracking-wider">PDF Танилцуулга</span>
+                    <span class="text-xs font-bold text-slate-700 truncate max-w-[200px] sm:max-w-md">Салбарын нөлөөллийн шинжилгээ</span>
+                </div>
+                <button type="button" onclick="closeSalbarModal()" class="w-8 h-8 rounded-full bg-slate-200/80 hover:bg-slate-300 active:scale-95 flex items-center justify-center text-slate-600 transition-colors cursor-pointer border-none font-bold text-sm" aria-label="Хаах">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Modal Content (Pages 1 to 4) -->
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 min-h-[320px]">
+                <!-- Salbar Page 1 -->
+                <div class="book-page active" id="salbarPage1">
+                    <div class="text-center py-2">
+                        <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 1 / 4 • Юу хийж чадах вэ?</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2 mb-2">Хиймэл оюунд суурилсан салбарын нөлөөллийн шинжилгээ</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed mt-2 mb-4">
+                            Энэхүү шинжилгээ нь аливаа хууль тогтоомж, бодлогын баримт бичиг, салбарын дүрэм журам батлагдан хэрэгжсэнээр эдийн засаг, зах зээл, бизнес эрхлэгчид, нийгэм болон байгаль орчинд ямар үр дагавар, нөлөөлөл үзүүлэхийг урьдчилан тооцоолж үнэлдэг шинжилгээний арга хэрэгсэл юм.
+                        </p>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-xs text-blue-800 max-w-md mx-auto text-left">
+                            <span class="font-bold">Эрсдэлийн менежмент:</span> Эрсдэлийг хэрэгжсэний дараа биш, батлагдахаас өмнө тооцоолох нь хамгийн чухал.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salbar Page 2 -->
+                <div class="book-page" id="salbarPage2">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 2 / 4 • Бизнест учрах хохирол</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Гэнэтийн зохицуулалт бизнесүүдэд ямар хохирол учруулдаг вэ?</h3>
+                        </div>
+                        <div class="space-y-2.5 max-w-lg mx-auto mt-4">
+                            <div class="card-light p-3.5 border-l-4 border-l-rose-500">
+                                <div class="text-xs font-black text-rose-600 uppercase mb-0.5">Дагаж мөрдөх өндөр зардал:</div>
+                                <p class="text-xs text-slate-600">Шинэ шаардлага биелүүлэх нэмэлт зардал, хөрөнгө оруулалт шаардагдана.</p>
+                            </div>
+                            <div class="card-light p-3.5 border-l-4 border-l-amber-500">
+                                <div class="text-xs font-black text-amber-600 uppercase mb-0.5">Үйл ажиллагааны хүндрэл:</div>
+                                <p class="text-xs text-slate-600">Илүүдэл бичиг баримт, процессийн удаашрал, захиргааны хүнд суртал бий болно.</p>
+                            </div>
+                            <div class="card-light p-3.5 border-l-4 border-l-blue-500">
+                                <div class="text-xs font-black text-blue-600 uppercase mb-0.5">Өрсөлдөх чадвар буурах:</div>
+                                <p class="text-xs text-slate-600">Зах зээлийн хурдацтай өөрчлөлтөд хоцорч хариу үйлдэл үзүүлэх эрсдэл үүснэ.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salbar Page 3 -->
+                <div class="book-page" id="salbarPage3">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 3 / 4 • Шинжилгээний процесс</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Таны өмнөөс бүх нөлөөллийг тооцоолно</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs max-w-xl mx-auto mt-3">
+                            <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">1. Зорилго, хамрах хүрээ:</span>
+                                <p class="text-slate-600">Баримт бичгийн зохицуулах хүрээ, нөлөөлөлд өртөх салбарыг ялган танина.</p>
+                            </div>
+                            <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">2. Оролцогч талуудын зураглал:</span>
+                                <p class="text-slate-600">Хэрэглэгч, бизнес, төр зэрэг бүлэг тус бүрд үзүүлэх шууд ба шууд бус нөлөөг үнэлнэ.</p>
+                            </div>
+                            <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">3. Зардал & эдийн засгийн нөлөө:</span>
+                                <p class="text-slate-600">Нийцлийн зардал, захиргааны дарамт, өрсөлдөөнд үзүүлэх үр нөлөөг шинжилнэ.</p>
+                            </div>
+                            <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">4. Нөлөөллийн нэгдсэн тайлан:</span>
+                                <p class="text-slate-600">График дүрслэл, эрсдэл, үр өгөөжийн харьцаа бүхий удирдлагын тайлан гаргана.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salbar Page 4 -->
+                <div class="book-page" id="salbarPage4">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 4 / 4 • Үнэ цэнэ</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Шинжилгээний авчрах бодит үнэ цэнэ</h3>
+                        </div>
+                        <div class="space-y-2.5 max-w-lg mx-auto mt-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Цаасан дээрх сайн бодлого бүтэлгүйтэхээс сэргийлнэ:</span>
+                                <p class="text-slate-600">Зохицуулалтыг батлахаас өмнө зах зээлд үүсэх бодит хүндрэлийг олж харна.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Бизнесийн дарамт, зардлыг бодитой үнэлнэ:</span>
+                                <p class="text-slate-600">Шинэ журам нь аж ахуйн нэгжүүдэд хэт өндөр зардал, хүнд суртал үүсгэх эсэхийг баталгаажуулна.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Үндэслэлтэй нотолгоонд суурилсан шийдвэр гаргана:</span>
+                                <p class="text-slate-600">Зөвхөн таамаглалаар бус, тооцоолол, эрсдэлийн үнэлгээнд тулгуурлан дүрэм журмыг сайжруулна.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 bg-slate-50/90">
+                <button type="button" onclick="prevSalbarPage()" id="prevSalbarBtn" class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 disabled:opacity-40 cursor-pointer">
+                    ← Өмнөх хуудас
+                </button>
+                <span class="text-xs font-black text-blue-600" id="salbarPageIndicator">1 / 4</span>
+                <button type="button" onclick="nextSalbarPage()" id="nextSalbarBtn" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 disabled:opacity-40 cursor-pointer">
+                    Дараах хуудас →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: dogoldol-zasvarlah.pdf Modal -->
+    <div id="dogoldolModal" class="modal-backdrop" onclick="handleDogoldolBackdrop(event)">
+        <div class="modal-card">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50/90">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 bg-blue-600 text-white rounded text-[10px] font-black uppercase tracking-wider">PDF Танилцуулга</span>
+                    <span class="text-xs font-bold text-slate-700 truncate max-w-[200px] sm:max-w-md">Баримт бичгийн доголдлыг засварлах</span>
+                </div>
+                <button type="button" onclick="closeDogoldolModal()" class="w-8 h-8 rounded-full bg-slate-200/80 hover:bg-slate-300 active:scale-95 flex items-center justify-center text-slate-600 transition-colors cursor-pointer border-none font-bold text-sm" aria-label="Хаах">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Modal Content (Pages 1 to 4) -->
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 min-h-[320px]">
+                <!-- Dogoldol Page 1 -->
+                <div class="book-page active" id="dogoldolPage1">
+                    <div class="text-center py-2">
+                        <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 1 / 4 • Юу хийж чадах вэ?</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2 mb-2">Хиймэл оюунд суурилсан доголдлыг засварлах шинжилгээ</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto leading-relaxed mt-2 mb-4">
+                            Энэхүү шинжилгээ нь бусад шинжилгээнүүдээр илрүүлсэн бүх төрлийн алдаа, зөрчил, хийдэл, логикийн доголдлыг нэгтгэн, баримт бичгийг бүхэлд нь автоматаар засаж, шинэчлэн найруулж өгдөг эцсийн шатны шийдэл боловсруулах хэрэгсэл юм.
+                        </p>
+                        <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-800 max-w-md mx-auto text-left">
+                            <span class="font-bold">Эцсийн шатны шийдэл:</span> Алдааг зөвхөн зааж өгөх бус, хууль зүйн найруулгын бүрэн бэлэн хувилбарыг бүтээж өгнө.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dogoldol Page 2 -->
+                <div class="book-page" id="dogoldolPage2">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 2 / 4 • Тулгамддаг асуудлууд</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Танайд эдгээр асуудал тулгардаг уу?</h3>
+                        </div>
+                        <div class="space-y-2 max-w-lg mx-auto mt-3 text-xs text-slate-700">
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2">
+                                <span class="text-rose-500 font-bold">✕</span> Цаасан дээр бичигдсэн ч амьдрал дээр хэрэгждэггүй
+                            </div>
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2">
+                                <span class="text-rose-500 font-bold">✕</span> Журам засах, шинэчлэхэд хэт их цаг, хүн хүч үрдэг
+                            </div>
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2">
+                                <span class="text-rose-500 font-bold">✕</span> Баримт бичиг дотроо өөрөө өөртэйгөө зөрчилддөг
+                            </div>
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2">
+                                <span class="text-rose-500 font-bold">✕</span> Тодорхойгүй үг хэллэгээс үл ойлголцол үүсдэг
+                            </div>
+                            <div class="p-2.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2">
+                                <span class="text-rose-500 font-bold">✕</span> Хууль зөрчсөнөөс болж маргаан, торгууль үүсдэг
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dogoldol Page 3 -->
+                <div class="book-page" id="dogoldolPage3">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 3 / 4 • Системийн шийдэл</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Засварлах 4 алхамт автомат процесс</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto mt-3 text-xs">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">1. Доголдлуудыг нэгтгэн ангилна:</span>
+                                <p class="text-slate-600">Эрх зүйн, бүтцийн, найруулгын бүх алдааг жагсаана.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">2. Заалт бүрийг найруулна:</span>
+                                <p class="text-slate-600">Агуулгыг хадгалан, хууль зүйн дагуу оновчтой найруулгаар солино.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">3. Бүтэц, логик холбоог шалгана:</span>
+                                <p class="text-slate-600">Зассан заалтууд бусад бүлэгтэйгээ харшлахгүй байгааг эцэслэнэ.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                                <span class="font-bold text-blue-600 block mb-0.5">4. Бэлэн баримт бичиг үүсгэнэ:</span>
+                                <p class="text-slate-600">Эх форматыг хадгалан эцсийн хувилбарыг бэлэн болгоно.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dogoldol Page 4 -->
+                <div class="book-page" id="dogoldolPage4">
+                    <div class="py-2">
+                        <div class="text-center mb-3">
+                            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Хуудас 4 / 4 • Үнэ цэнэ</span>
+                            <h3 class="text-lg sm:text-2xl font-black text-slate-900 mt-2">Байгууллагын засаглал ба бүтээмж</h3>
+                        </div>
+                        <div class="space-y-2.5 max-w-lg mx-auto mt-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Хуулийн багийн бүтээмж нэмэгдэнэ:</span>
+                                <p class="text-slate-600">Механик үг засах ажлаас чөлөөлөгдөж, илүү чухал стратеги, хэлэлцээрт төвлөрнө.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Шүүх, маргааны эрсдэл эрс буурна:</span>
+                                <p class="text-slate-600">Тодорхойгүй, хууль зөрчсөн заалтаас үүдэлтэй маргаан, торгуулиас найдвартай сэргийлнэ.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                                <span class="font-black text-blue-600 block mb-0.5">Байгууллагын засаглал сайжирна:</span>
+                                <p class="text-slate-600">Бүх дүрэм журам нэгдсэн стандарт, маш ойлгомжтой найруулгатай болно.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between px-4 py-3 border-t border-slate-100 bg-slate-50/90">
+                <button type="button" onclick="prevDogoldolPage()" id="prevDogoldolBtn" class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-xs font-bold hover:bg-slate-100 disabled:opacity-40 cursor-pointer">
+                    ← Өмнөх хуудас
+                </button>
+                <span class="text-xs font-black text-blue-600" id="dogoldolPageIndicator">1 / 4</span>
+                <button type="button" onclick="nextDogoldolPage()" id="nextDogoldolBtn" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700 disabled:opacity-40 cursor-pointer">
+                    Дараах хуудас →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 7: Dynamic Tutorial Video Modal -->
     <div id="videoModal" class="modal-backdrop" onclick="handleVideoBackdrop(event)">
         <div class="modal-card max-w-3xl">
             <!-- Modal Header -->
@@ -1197,6 +1560,15 @@
 
         let currentQualityPage = 1;
         const totalQualityPages = 4;
+
+        let currentDocCompPage = 1;
+        const totalDocCompPages = 4;
+
+        let currentSalbarPage = 1;
+        const totalSalbarPages = 4;
+
+        let currentDogoldolPage = 1;
+        const totalDogoldolPages = 4;
 
         // Slide Manager
         function updateSlide() {
@@ -1266,6 +1638,9 @@
                     closeFlipbookModal();
                     closeHumanRightsModal();
                     closeQualityModal();
+                    closeDocCompModal();
+                    closeSalbarModal();
+                    closeDogoldolModal();
                     closeVideoModal();
                 }
                 return;
@@ -1433,7 +1808,142 @@
             }
         }
 
-        /* --- 4. Video Modal Logic (Dynamic ID) --- */
+        /* --- 4. Document Compliance Modal Logic --- */
+        function openDocCompModal() {
+            currentDocCompPage = 1;
+            updateDocCompPages();
+            const modal = document.getElementById('docCompModal');
+            if (modal) modal.classList.add('open');
+        }
+
+        function closeDocCompModal() {
+            const modal = document.getElementById('docCompModal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        function handleDocCompBackdrop(e) {
+            if (e.target.id === 'docCompModal') closeDocCompModal();
+        }
+
+        function updateDocCompPages() {
+            for (let i = 1; i <= totalDocCompPages; i++) {
+                const page = document.getElementById(`docCompPage${i}`);
+                if (page) page.classList.toggle('active', i === currentDocCompPage);
+            }
+            const ind = document.getElementById('docCompPageIndicator');
+            if (ind) ind.textContent = `${currentDocCompPage} / ${totalDocCompPages}`;
+
+            const prev = document.getElementById('prevDocCompBtn');
+            const next = document.getElementById('nextDocCompBtn');
+            if (prev) prev.disabled = (currentDocCompPage === 1);
+            if (next) next.disabled = (currentDocCompPage === totalDocCompPages);
+        }
+
+        function nextDocCompPage() {
+            if (currentDocCompPage < totalDocCompPages) {
+                currentDocCompPage++;
+                updateDocCompPages();
+            }
+        }
+
+        function prevDocCompPage() {
+            if (currentDocCompPage > 1) {
+                currentDocCompPage--;
+                updateDocCompPages();
+            }
+        }
+
+        /* --- 5. Salbariin Nuluulul Modal Logic --- */
+        function openSalbarModal() {
+            currentSalbarPage = 1;
+            updateSalbarPages();
+            const modal = document.getElementById('salbarModal');
+            if (modal) modal.classList.add('open');
+        }
+
+        function closeSalbarModal() {
+            const modal = document.getElementById('salbarModal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        function handleSalbarBackdrop(e) {
+            if (e.target.id === 'salbarModal') closeSalbarModal();
+        }
+
+        function updateSalbarPages() {
+            for (let i = 1; i <= totalSalbarPages; i++) {
+                const page = document.getElementById(`salbarPage${i}`);
+                if (page) page.classList.toggle('active', i === currentSalbarPage);
+            }
+            const ind = document.getElementById('salbarPageIndicator');
+            if (ind) ind.textContent = `${currentSalbarPage} / ${totalSalbarPages}`;
+
+            const prev = document.getElementById('prevSalbarBtn');
+            const next = document.getElementById('nextSalbarBtn');
+            if (prev) prev.disabled = (currentSalbarPage === 1);
+            if (next) next.disabled = (currentSalbarPage === totalSalbarPages);
+        }
+
+        function nextSalbarPage() {
+            if (currentSalbarPage < totalSalbarPages) {
+                currentSalbarPage++;
+                updateSalbarPages();
+            }
+        }
+
+        function prevSalbarPage() {
+            if (currentSalbarPage > 1) {
+                currentSalbarPage--;
+                updateSalbarPages();
+            }
+        }
+
+        /* --- 6. Dogoldol Zasvarlah Modal Logic --- */
+        function openDogoldolModal() {
+            currentDogoldolPage = 1;
+            updateDogoldolPages();
+            const modal = document.getElementById('dogoldolModal');
+            if (modal) modal.classList.add('open');
+        }
+
+        function closeDogoldolModal() {
+            const modal = document.getElementById('dogoldolModal');
+            if (modal) modal.classList.remove('open');
+        }
+
+        function handleDogoldolBackdrop(e) {
+            if (e.target.id === 'dogoldolModal') closeDogoldolModal();
+        }
+
+        function updateDogoldolPages() {
+            for (let i = 1; i <= totalDogoldolPages; i++) {
+                const page = document.getElementById(`dogoldolPage${i}`);
+                if (page) page.classList.toggle('active', i === currentDogoldolPage);
+            }
+            const ind = document.getElementById('dogoldolPageIndicator');
+            if (ind) ind.textContent = `${currentDogoldolPage} / ${totalDogoldolPages}`;
+
+            const prev = document.getElementById('prevDogoldolBtn');
+            const next = document.getElementById('nextDogoldolBtn');
+            if (prev) prev.disabled = (currentDogoldolPage === 1);
+            if (next) next.disabled = (currentDogoldolPage === totalDogoldolPages);
+        }
+
+        function nextDogoldolPage() {
+            if (currentDogoldolPage < totalDogoldolPages) {
+                currentDogoldolPage++;
+                updateDogoldolPages();
+            }
+        }
+
+        function prevDogoldolPage() {
+            if (currentDogoldolPage > 1) {
+                currentDogoldolPage--;
+                updateDogoldolPages();
+            }
+        }
+
+        /* --- 7. Video Modal Logic (Dynamic ID) --- */
         function openVideoModal(videoId = 'A1dCBmxEb4o', title = 'Tussio AI Compliance • Заавар бичлэг') {
             const titleEl = document.getElementById('videoModalTitle');
             if (titleEl) titleEl.textContent = title;
