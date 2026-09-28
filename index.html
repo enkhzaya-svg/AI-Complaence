@@ -2,11 +2,11 @@
 <html lang="mn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tussio AI Compliance - Interactive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap');
         
         body {
             font-family: 'Manrope', sans-serif;
@@ -14,24 +14,34 @@
             color: #1e293b;
             margin: 0;
             overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
         }
 
         .slide {
             display: none;
             height: 100vh;
+            height: 100dvh;
             width: 100vw;
-            padding: 3rem 6rem;
             box-sizing: border-box;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .slide.active {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             opacity: 1;
+        }
+
+        @media (min-width: 768px) {
+            .slide.active {
+                justify-content: center;
+            }
         }
 
         .blue-gradient {
@@ -47,20 +57,20 @@
         .card-light {
             background: white;
             border: 1px solid #e2e8f0;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-light:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 20px -4px rgba(0, 0, 0, 0.08);
             border-color: #3b82f6;
         }
 
         .step-circle {
-            width: 40px;
-            height: 40px;
+            width: 34px;
+            height: 34px;
             background: #eff6ff;
             color: #2563eb;
             border: 2px solid #dbeafe;
@@ -69,8 +79,8 @@
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
             transition: all 0.3s ease;
         }
 
@@ -84,64 +94,151 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 6px;
+            height: 4px;
             background: #2563eb;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
             z-index: 1000;
         }
 
-        /* Side Navigation Buttons */
         .nav-side-btn {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             background: white;
             border-radius: 50%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f1f5f9;
+            box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
             cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
+            z-index: 900;
+            transition: all 0.25s ease;
             color: #64748b;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-side-btn {
+                display: flex;
+            }
         }
 
         .nav-side-btn:hover {
             color: #2563eb;
             border-color: #2563eb;
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(-50%) scale(1.08);
             background: #eff6ff;
         }
 
         .nav-side-btn.disabled {
-            opacity: 0.3;
+            opacity: 0.25;
             cursor: not-allowed;
             pointer-events: none;
         }
 
-        .nav-left { left: 1.5rem; }
-        .nav-right { right: 1.5rem; }
+        .nav-left { left: 1.25rem; }
+        .nav-right { right: 1.25rem; }
 
-        /* Icon Animation Styles */
-        .icon-container {
-            height: 100px;
+        .mobile-nav-dock {
+            position: fixed;
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
+            border-radius: 9999px;
+            padding: 0.4rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 999;
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-nav-dock {
+                bottom: 1.5rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        .mobile-nav-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            background: #f1f5f9;
+            color: #334155;
+            transition: all 0.2s;
         }
 
-        /* Step 1: Scanner Animation */
+        .mobile-nav-btn:active, .mobile-nav-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .mobile-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .icon-container {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-nav-dock {
+                bottom: 1.5rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        .mobile-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            color: #334155;
+            transition: all 0.2s;
+        }
+
+        .mobile-nav-btn:active, .mobile-nav-btn:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .mobile-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .icon-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
         .scan-line {
             animation: scanMove 2.5s ease-in-out infinite;
         }
         @keyframes scanMove {
-            0%, 100% { transform: translateY(-15px); opacity: 0; }
-            50% { transform: translateY(15px); opacity: 1; }
+            0%, 100% { transform: translateY(-12px); opacity: 0; }
+            50% { transform: translateY(12px); opacity: 1; }
         }
         .doc-body {
             animation: docPulse 2s ease-in-out infinite;
@@ -151,7 +248,6 @@
             50% { opacity: 1; }
         }
 
-        /* Step 2: Mapping Animation */
         .node {
             animation: nodePulse 2s infinite;
         }
@@ -167,17 +263,15 @@
             to { stroke-dashoffset: -20; }
         }
 
-        /* Step 3: Analysis Animation */
         .data-dot {
             animation: dataFall 1.5s infinite;
         }
         @keyframes dataFall {
-            0% { transform: translateY(-10px); opacity: 0; }
+            0% { transform: translateY(-8px); opacity: 0; }
             50% { opacity: 1; }
-            100% { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(8px); opacity: 0; }
         }
 
-        /* Step 4: Auto-Task Animation */
         .check-mark {
             stroke-dasharray: 50;
             stroke-dashoffset: 50;
@@ -187,384 +281,387 @@
             0%, 30% { stroke-dashoffset: 50; }
             60%, 100% { stroke-dashoffset: 0; }
         }
-        .task-rect {
-            animation: rectSlide 2s infinite;
-        }
-        @keyframes rectSlide {
-            0%, 20% { transform: translateX(-5px); opacity: 0; }
-            50%, 80% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(5px); opacity: 0; }
-        }
 
-        /* Document Generator Animations */
-        .sparkle-pulse {
-            animation: sparkleGlow 1.8s infinite alternate;
+        .animate-in { 
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
         }
-        @keyframes sparkleGlow {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            100% { transform: scale(1.15); opacity: 1; }
-        }
-
-        /* Common Animations */
-        .animate-in { animation: slideUp 0.8s ease forwards; }
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .floating {
-            animation: floating 3.2s ease-in-out infinite;
-        }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
         }
 
         .pulse-blue {
             animation: pulse-blue 2.5s infinite;
         }
         @keyframes pulse-blue {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-            70% { box-shadow: 0 0 0 20px rgba(37, 99, 235, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.35); }
+            70% { box-shadow: 0 0 0 16px rgba(37, 99, 235, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Progress indicator bar at top -->
     <div class="progress-indicator" id="progressIndicator"></div>
 
-    <!-- Side Navigation -->
-    <div class="nav-side-btn nav-left" id="prevBtn" onclick="prevSlide()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+    <!-- Desktop side navigation buttons -->
+    <div class="nav-side-btn nav-left" id="prevBtn" onclick="prevSlide()" aria-label="Өмнөх">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
     </div>
-    <div class="nav-side-btn nav-right" id="nextBtn" onclick="nextSlide()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+    <div class="nav-side-btn nav-right" id="nextBtn" onclick="nextSlide()" aria-label="Дараах">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
     </div>
 
-    <!-- Slide 1: Welcome -->
-    <section class="slide active" id="slide1">
-        <div class="max-w-5xl text-center animate-in">
-            <div class="inline-block px-4 py-1 bg-blue-50 text-blue-600 rounded-full font-bold text-xs mb-6 uppercase tracking-widest">TUSS.io</div>
-            <h1 class="text-7xl font-extrabold mb-6 leading-tight">AI-аар комплаенсыг<br><span class="text-gradient">хялбарчил</span></h1>
-            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto">Дагаж мөрдөх хэрэгцээтэй маш олон стандарт, хууль дүрэм журам бүрийг хялбараар нийцлийг шалгая.</p>
+    <!-- Mobile-first bottom navigation dock -->
+    <div class="mobile-nav-dock">
+        <button class="mobile-nav-btn" id="mobilePrevBtn" onclick="prevSlide()" aria-label="Өмнөх">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <span class="text-xs font-bold text-slate-600 px-2 tracking-wide" id="slideCounter">1 / 6</span>
+        <button class="mobile-nav-btn" id="mobileNextBtn" onclick="nextSlide()" aria-label="Дараах">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
+
+    <section class="slide active px-4 py-8 sm:py-12 md:py-16 md:px-16" id="slide1">
+        <div class="max-w-4xl w-full text-center my-auto pb-28 md:pb-0 animate-in">
+            <div class="inline-block px-3.5 py-1 bg-blue-50 text-blue-600 rounded-full font-extrabold text-[11px] mb-4 uppercase tracking-widest border border-blue-100">TUSS.io</div>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight">AI-аар комплаенсыг<br><span class="text-gradient">хялбарчил</span></h1>
+            <p class="text-xs sm:text-base md:text-lg text-slate-500 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-2">Дагаж мөрдөх хэрэгцээтэй маш олон стандарт, хууль дүрэм журам бүрийг хялбараар нийцлийг шалгая.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
-                <div class="card-light p-8">
-                    <div class="text-5xl font-black text-blue-600 mb-2">100x</div>
-                    <div class="text-slate-500 font-semibold text-lg">Хурд</div>
+            <!-- Vertically stacked cards on mobile, 3-column row on tablet/desktop -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mt-2 max-w-xs sm:max-w-xl mx-auto w-full px-4">
+                <div class="card-light py-3.5 sm:py-5 px-4 flex flex-col justify-center items-center text-center">
+                    <div class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-blue-600 tracking-tight leading-none mb-1 sm:mb-2">100x</div>
+                    <div class="text-slate-600 font-bold text-xs sm:text-sm">Хурд</div>
                 </div>
-                <div class="card-light p-8">
-                    <div class="text-5xl font-black text-blue-600 mb-2">10x</div>
-                    <div class="text-slate-500 font-semibold text-lg">Зардал хэмнэлт</div>
+                <div class="card-light py-3.5 sm:py-5 px-4 flex flex-col justify-center items-center text-center">
+                    <div class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-blue-600 tracking-tight leading-none mb-1 sm:mb-2">10x</div>
+                    <div class="text-slate-600 font-bold text-xs sm:text-sm">Зардал хэмнэлт</div>
                 </div>
-                <div class="card-light p-8">
-                    <div class="text-5xl font-black text-blue-600 mb-2">95%</div>
-                    <div class="text-slate-500 font-semibold text-lg">Баталгаа</div>
+                <div class="card-light py-3.5 sm:py-5 px-4 flex flex-col justify-center items-center text-center">
+                    <div class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-blue-600 tracking-tight leading-none mb-1 sm:mb-2">95%</div>
+                    <div class="text-slate-600 font-bold text-xs sm:text-sm">Баталгаа</div>
                 </div>
             </div>
             
-            <div class="mt-12 text-blue-600 font-bold text-xl uppercase tracking-widest">AI Комплаенс Эрсдэл = 0</div>
+            <div class="mt-6 sm:mt-10 inline-block px-5 py-2.5 bg-blue-50 text-blue-700 rounded-full font-extrabold text-xs sm:text-sm uppercase tracking-wider border border-blue-100/70 shadow-sm">
+                AI Комплаенс Эрсдэл = 0
+            </div>
         </div>
     </section>
 
-    <!-- Slide 2: Gap Analysis Process -->
-    <section class="slide" id="slide2">
-        <div class="max-w-7xl w-full px-6">
-            <h2 class="text-4xl font-extrabold mb-4 text-center">Gap analyze - <span class="text-blue-600">Зөрүүний шинжилгээ</span></h2>
-            <p class="text-center text-slate-500 mb-12">Та ямар ч стандартыг өөрийн үйл ажиллагаатай хэдхэн минутад харьцуулж болно</p>
+    <section class="slide px-4 py-8 sm:py-12 md:py-16 md:px-16" id="slide2">
+        <div class="max-w-6xl w-full my-auto pb-28 md:pb-0 animate-in">
+            <h2 class="text-2xl sm:text-4xl font-extrabold mb-1.5 text-center">Gap analyze - <span class="text-blue-600">Зөрүүний шинжилгээ</span></h2>
+            <p class="text-center text-xs sm:text-sm text-slate-500 mb-6 sm:mb-10 max-w-xl mx-auto px-2">Та ямар ч стандартыг өөрийн үйл ажиллагаатай хэдхэн минутад харьцуулж болно</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
                 <!-- Step 1 -->
-                <div class="card-light p-6 flex flex-col items-center text-center">
-                    <div class="step-circle">1</div>
-                    <div class="icon-container">
-                        <svg class="w-20 h-20 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path class="doc-body" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line class="scan-line text-blue-400" x1="4" y1="12" x2="20" y2="12" stroke-width="2" />
-                            <path d="M8 13h4M8 17h8" stroke-opacity="0.3" />
-                        </svg>
+                <div class="card-light p-4 sm:p-5 flex flex-row sm:flex-col items-center sm:text-center gap-3.5 sm:gap-0">
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="step-circle sm:mb-2">1</div>
+                        <div class="icon-container w-16 h-16 sm:w-auto sm:h-16">
+                            <svg class="w-12 h-12 sm:w-14 sm:h-14 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path class="doc-body" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line class="scan-line text-blue-400" x1="4" y1="12" x2="20" y2="12" stroke-width="2" />
+                                <path d="M8 13h4M8 17h8" stroke-opacity="0.3" />
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">AI-р шалгууруудыг тодорхойлох</h3>
-                    <p class="text-[10px] text-slate-500 leading-normal">PDF-ээр байршуулахад AI түүнийг уншиж, шалгуур үзүүлэлтүүдийн жагсаалтыг бэлтгэнэ.</p>
+                    <div class="flex-1 text-left sm:text-center">
+                        <h3 class="font-bold text-xs sm:text-sm mb-1 text-slate-800 leading-snug">AI-р шалгууруудыг тодорхойлох</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">PDF байршуулахад AI түүнийг уншиж, шалгуур үзүүлэлтүүдийг задлан бэлтгэнэ.</p>
+                    </div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="card-light p-6 flex flex-col items-center text-center">
-                    <div class="step-circle">2</div>
-                    <div class="icon-container">
-                        <svg class="w-20 h-20 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle class="node" cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.2" />
-                            <circle class="node" style="animation-delay: 0.5s" cx="5" cy="5" r="2" />
-                            <circle class="node" style="animation-delay: 1s" cx="19" cy="5" r="2" />
-                            <circle class="node" style="animation-delay: 1.5s" cx="19" cy="19" r="2" />
-                            <circle class="node" style="animation-delay: 2s" cx="5" cy="19" r="2" />
-                            <line class="connection-line" x1="7" y1="7" x2="10.5" y2="10.5" stroke-opacity="0.5" />
-                            <line class="connection-line" x1="17" y1="7" x2="13.5" y2="10.5" stroke-opacity="0.5" />
-                            <line class="connection-line" x1="17" y1="17" x2="13.5" y2="13.5" stroke-opacity="0.5" />
-                            <line class="connection-line" x1="7" y1="17" x2="10.5" y2="13.5" stroke-opacity="0.5" />
-                        </svg>
+                <div class="card-light p-4 sm:p-5 flex flex-row sm:flex-col items-center sm:text-center gap-3.5 sm:gap-0">
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="step-circle sm:mb-2">2</div>
+                        <div class="icon-container w-16 h-16 sm:w-auto sm:h-16">
+                            <svg class="w-12 h-12 sm:w-14 sm:h-14 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle class="node" cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.2" />
+                                <circle class="node" style="animation-delay: 0.5s" cx="5" cy="5" r="2" />
+                                <circle class="node" style="animation-delay: 1s" cx="19" cy="5" r="2" />
+                                <circle class="node" style="animation-delay: 1.5s" cx="19" cy="19" r="2" />
+                                <circle class="node" style="animation-delay: 2s" cx="5" cy="19" r="2" />
+                                <line class="connection-line" x1="7" y1="7" x2="10.5" y2="10.5" stroke-opacity="0.5" />
+                                <line class="connection-line" x1="17" y1="7" x2="13.5" y2="10.5" stroke-opacity="0.5" />
+                                <line class="connection-line" x1="17" y1="17" x2="13.5" y2="13.5" stroke-opacity="0.5" />
+                                <line class="connection-line" x1="7" y1="17" x2="10.5" y2="13.5" stroke-opacity="0.5" />
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Шинжилгээнд ашиглах баримт бичгээ оруулах</h3>
-                    <p class="text-[10px] text-slate-500 leading-normal">Нотлох баримтуудаа оруулах эсвэл платформ дээрх бодит өгөгдлүүдээ холбоно.</p>
+                    <div class="flex-1 text-left sm:text-center">
+                        <h3 class="font-bold text-xs sm:text-sm mb-1 text-slate-800 leading-snug">Шинжилгээнд баримтаа оруулах</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">Нотлох баримтууд эсвэл платформ дээрх бодит өгөгдлүүдээ холбоно.</p>
+                    </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="card-light p-6 flex flex-col items-center text-center">
-                    <div class="step-circle">3</div>
-                    <div class="icon-container">
-                        <div class="relative w-24 h-24 flex items-center justify-center">
-                            <svg class="w-full h-full transform -rotate-90">
-                                <circle cx="48" cy="48" r="40" stroke="#eff6ff" stroke-width="8" fill="transparent" />
-                                <circle id="scoreRing" cx="48" cy="48" r="40" stroke="#3b82f6" stroke-width="8" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" />
-                            </svg>
-                            <div class="absolute flex flex-col items-center">
-                                <span class="font-black text-blue-600 text-xl leading-none">82%</span>
-                                <div class="flex gap-1 mt-1">
-                                    <div class="data-dot w-1 h-1 bg-blue-400 rounded-full"></div>
-                                    <div class="data-dot w-1 h-1 bg-blue-400 rounded-full" style="animation-delay: 0.3s"></div>
-                                    <div class="data-dot w-1 h-1 bg-blue-400 rounded-full" style="animation-delay: 0.6s"></div>
+                <div class="card-light p-4 sm:p-5 flex flex-row sm:flex-col items-center sm:text-center gap-3.5 sm:gap-0">
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="step-circle sm:mb-2">3</div>
+                        <div class="icon-container w-16 h-16 sm:w-auto sm:h-16">
+                            <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="28" cy="28" r="22" class="sm:hidden" stroke="#eff6ff" stroke-width="5" fill="transparent" />
+                                    <circle cx="32" cy="32" r="26" class="hidden sm:block" stroke="#eff6ff" stroke-width="6" fill="transparent" />
+                                    <circle id="scoreRing" cx="32" cy="32" r="26" stroke="#3b82f6" stroke-width="6" fill="transparent" stroke-dasharray="163.3" stroke-dashoffset="163.3" stroke-linecap="round" />
+                                </svg>
+                                <div class="absolute flex flex-col items-center">
+                                    <span class="font-black text-blue-600 text-xs sm:text-sm leading-none">82%</span>
+                                    <div class="flex gap-1 mt-0.5">
+                                        <div class="data-dot w-1 h-1 bg-blue-400 rounded-full"></div>
+                                        <div class="data-dot w-1 h-1 bg-blue-400 rounded-full" style="animation-delay: 0.3s"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Үнэлгээ</h3>
-                    <p class="text-[10px] text-slate-500 leading-normal">AI нь нотлох баримт бүрийг харьцуулж, нийцлийн хувь болон Gap-ийг тодорхойлно.</p>
+                    <div class="flex-1 text-left sm:text-center">
+                        <h3 class="font-bold text-xs sm:text-sm mb-1 text-slate-800 leading-snug">Үнэлгээ</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">AI нь нотлох баримт бүрийг харьцуулж, нийцлийн хувь болон Gap-ийг тодорхойлно.</p>
+                    </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="card-light p-6 flex flex-col items-center text-center">
-                    <div class="step-circle">4</div>
-                    <div class="icon-container">
-                        <svg class="w-20 h-20 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="3" y="4" width="18" height="16" rx="2" stroke-opacity="0.3" />
-                            <path class="task-rect" d="M7 8h6" stroke-width="2" />
-                            <path class="task-rect" style="animation-delay: 0.5s" d="M7 12h8" stroke-width="2" />
-                            <path class="task-rect" style="animation-delay: 1s" d="M7 16h4" stroke-width="2" />
-                            <path class="check-mark text-blue-500" d="M16 10l2 2 4-4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                <div class="card-light p-4 sm:p-5 flex flex-row sm:flex-col items-center sm:text-center gap-3.5 sm:gap-0">
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="step-circle sm:mb-2">4</div>
+                        <div class="icon-container w-16 h-16 sm:w-auto sm:h-16">
+                            <svg class="w-12 h-12 sm:w-14 sm:h-14 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke-opacity="0.3" />
+                                <path d="M7 8h6" stroke-width="2" />
+                                <path d="M7 12h8" stroke-width="2" />
+                                <path class="check-mark text-blue-500" d="M16 10l2 2 4-4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-sm leading-tight">Автомат ажлын төлөвлөгөө</h3>
-                    <p class="text-[10px] text-slate-500 leading-normal">Дутагдлыг засах зөвлөмжийг боловсруулж, Task болгон нэмнэ.</p>
+                    <div class="flex-1 text-left sm:text-center">
+                        <h3 class="font-bold text-xs sm:text-sm mb-1 text-slate-800 leading-snug">Автомат ажлын төлөвлөгөө</h3>
+                        <p class="text-[11px] text-slate-500 leading-relaxed">Дутагдлыг засах зөвлөмжийг боловсруулж, Task болгон шууд нэмнэ.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Slide 3: Additional Solutions - Updated with All 10 Tools from Screenshot -->
-    <section class="slide" id="slide3">
-        <div class="max-w-7xl w-full px-4">
-            <div class="inline-block px-4 py-1 bg-blue-600 text-white rounded-full font-bold text-xs mb-3 uppercase tracking-widest mx-auto block w-max">Unlimited AI Toolbox</div>
-            <h2 class="text-3xl font-extrabold mb-8 text-center leading-tight">Дүрэм, журам эрх зүйн актыг шинжлэх<br><span class="text-blue-600">нэмэлт шийдлүүд</span></h2>
+    <section class="slide px-4 py-8 sm:py-12 md:py-14 md:px-16" id="slide3">
+        <div class="max-w-6xl w-full my-auto pb-28 md:pb-0 animate-in">
+            <div class="inline-block px-3 py-1 bg-blue-600 text-white rounded-full font-bold text-[10px] mb-2 uppercase tracking-widest mx-auto block w-max shadow-sm">Unlimited AI Toolbox</div>
+            <h2 class="text-xl sm:text-3xl font-extrabold mb-5 text-center leading-tight">Дүрэм, журам эрх зүйн актыг шинжлэх<br><span class="text-blue-600">нэмэлт шийдлүүд</span></h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <!-- Mobile: 1 column spacious cards; Tablet: 2 cols; Desktop: 5 cols -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3.5">
                 <!-- Tool 1 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Хүний эрхийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хүний эрхийн конвенци болон хуульд нийцсэн байдлыг тусгайлан хянана.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Хүний эрхийн шинжилгээ</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Конвенци болон хуульд нийцсэн байдлыг тусгайлан хянана.</p>
                     </div>
                 </div>
 
                 <!-- Tool 2 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Зохицуулалтын чанарын шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хугацаа, субьектив, хариуцах эзнээр бодит эрсдэлүүдийг шинжилнэ.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Зохицуулалтын чанарын шинжилгээ</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хугацаа, субьектив, хариуцах эзнээр эрсдэлийг шинжилнэ.</p>
                     </div>
                 </div>
 
                 <!-- Tool 3 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Баримт бичгийн нийцлийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хоёр баримтын зөрүүг илрүүлж, хуулийн нийцлийг нэг бүрчлэн хянана.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Баримт бичгийн нийцэл</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хоёр баримтын зөрүүг илрүүлж, хуулийн нийцлийг хянана.</p>
                     </div>
                 </div>
 
                 <!-- Tool 4 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Баримт бичгийн салбарын нөлөөллийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хуулийн өөрчлөлтөөс үүсэх салбарын эрсдэл, давуу талыг тодорхойлно.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Салбарын нөлөөллийн шинжилгээ</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Хуулийн өөрчлөлтөөс үүсэх салбарын эрсдэлийг тодорхойлно.</p>
                     </div>
                 </div>
 
                 <!-- Tool 5 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Баримт бичгийн доголдлыг засварлах</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Сайжруулах зөвлөмжийн дагуу алдааг засварлах хувилбар санал болгоно.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Доголдлыг засварлах</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Сайжруулах зөвлөмжийн дагуу засах хувилбар санал болгоно.</p>
                     </div>
                 </div>
 
                 <!-- Tool 6 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Гэрээний чанарын шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Гэрээний заалт, талуудын эрх ашиг, эрсдэлтэй нөхцлүүдийг шинжилнэ.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Гэрээний чанарын шинжилгээ</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Гэрээний заалт, эрсдэлтэй нөхцлүүдийг шинжилнэ.</p>
                     </div>
                 </div>
 
                 <!-- Tool 7 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0V9a2 2 0 012-2h2a2 2 0 012 2v2m-4 0h4"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Байгууллагын соёлын нийцэл</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Дотоод соёл, хэм хэмжээ, үнэт зүйлсийн нийцлийг дүрмийн дагуу хянана.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0V9a2 2 0 012-2h2a2 2 0 012 2v2m-4 0h4"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Байгууллагын соёлын нийцэл</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Дотоод соёл, үнэт зүйлсийн нийцлийг дүрмийн дагуу хянана.</p>
                     </div>
                 </div>
 
                 <!-- Tool 8 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Далд зөрчлийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Баримт бичиг болон үйл ажиллагаан дахь нуугдмал эрсдэлийг илрүүлнэ.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Далд зөрчлийн шинжилгээ</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Үйл ажиллагаан дахь нуугдмал эрсдэлийг илрүүлнэ.</p>
                     </div>
                 </div>
 
                 <!-- Tool 9 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Шүгэл үлээгчийн эрхийн шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Мэдээлэгчийн хамгаалалт, шүгэл үлээх тогтолцооны эрх зүйн нийцлийг шалгана.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Шүгэл үлээгчийн эрх</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">Мэдээлэгчийн хамгаалалтын эрх зүйн нийцлийг шалгана.</p>
                     </div>
                 </div>
 
                 <!-- Tool 10 -->
-                <div class="group card-light p-4 hover:bg-blue-600 hover:text-white flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center mb-3 transition-colors">
-                            <svg class="w-5 h-5 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        </div>
-                        <h3 class="font-bold text-sm mb-1">Мөнгө угаалт, терроризмын зөрчлийг илрүүлэх шинжилгээ</h3>
-                        <p class="text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">AML/CFT журам болон комплаенсын шаардлагын биелэлтийг шинжилнэ.</p>
+                <div class="group card-light p-3 sm:p-3.5 hover:bg-blue-600 hover:text-white flex flex-row sm:flex-col items-center sm:items-start gap-3 sm:gap-0 justify-between transition-all">
+                    <div class="w-9 h-9 sm:w-8 sm:h-8 bg-blue-50 group-hover:bg-blue-500 rounded-lg flex items-center justify-center shrink-0 sm:mb-2 transition-colors">
+                        <svg class="w-4 h-4 text-blue-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-xs sm:text-sm mb-0.5 leading-snug">Мөнгө угаалтын эрсдэл</h3>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500 group-hover:text-blue-100 leading-snug">AML/CFT комплаенсын шаардлагын биелэлтийг шинжилнэ.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Slide 4: AI Document Generation Solutions -->
-    <section class="slide" id="slide4">
-        <div class="max-w-6xl w-full px-6">
-            <div class="inline-block px-4 py-1 bg-blue-50 text-blue-600 rounded-full font-bold text-xs mb-3 uppercase tracking-widest mx-auto block w-max">AI Document Automation</div>
-            <h2 class="text-4xl font-extrabold mb-4 text-center leading-tight">AI-аар баримт бичиг<br><span class="text-blue-600">автоматаар үүсгэх</span></h2>
-            <p class="text-center text-slate-500 mb-12 max-w-2xl mx-auto">Байгууллагын стандарт, хууль эрх зүйн шаардлагад нийцсэн баримт бичгүүдийг хормын дотор боловсруулаарай.</p>
+    <section class="slide px-4 py-8 sm:py-12 md:py-16 md:px-16" id="slide4">
+        <div class="max-w-5xl w-full my-auto pb-28 md:pb-0 animate-in">
+            <div class="inline-block px-3.5 py-1 bg-blue-50 text-blue-600 rounded-full font-bold text-[10px] mb-2 uppercase tracking-widest mx-auto block w-max border border-blue-100">AI Document Automation</div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold mb-2 text-center leading-tight">AI-аар баримт бичиг<br><span class="text-blue-600">автоматаар үүсгэх</span></h2>
+            <p class="text-center text-xs sm:text-sm text-slate-500 mb-6 sm:mb-10 max-w-xl mx-auto px-2">Стандарт, хууль эрх зүйн шаардлагад нийцсэн баримтуудыг хормын дотор боловсруулаарай.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Document Gen 1: Official Letters -->
-                <div class="card-light p-8 flex flex-col justify-between group hover:border-blue-500">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6">
+                <!-- Document Gen 1 -->
+                <div class="card-light p-4 sm:p-6 flex flex-col justify-between group hover:border-blue-500">
                     <div>
-                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
-                        <div class="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 font-bold text-[10px] rounded mb-3 uppercase tracking-wider">Албан хэрэг хөтлөлт</div>
-                        <h3 class="text-2xl font-bold mb-3 text-slate-800">AI - Албан бичиг үүсгэх</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-6">Албан хүсэлт, мэдэгдэл, хариу албан бичиг, тушаал шийдвэрийн төслийг стандартын дагуу алдаагүй бэлтгэнэ.</p>
+                        <div class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 font-bold text-[9px] rounded mb-2 uppercase">Албан хэрэг хөтлөлт</div>
+                        <h3 class="text-base sm:text-xl font-bold mb-1.5 text-slate-800">AI - Албан бичиг үүсгэх</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-4">Хүсэлт, мэдэгдэл, хариу албан бичиг, тушаалын төслийг стандартын дагуу бэлтгэнэ.</p>
                     </div>
-                    <ul class="space-y-2 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-600">
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Стандарт бүтцийн дагуу</li>
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Мэргэжлийн найруулга зүй</li>
+                    <ul class="space-y-1.5 border-t border-slate-100 pt-3 text-[11px] font-semibold text-slate-600">
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Стандарт бүтэцтэй</li>
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Мэргэжлийн найруулга</li>
                     </ul>
                 </div>
 
-                <!-- Document Gen 2: Contracts -->
-                <div class="card-light p-8 flex flex-col justify-between group hover:border-blue-500 relative">
-                    <div class="absolute -top-3 right-6 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow">Эрсдэлгүй</div>
+                <!-- Document Gen 2 -->
+                <div class="card-light p-4 sm:p-6 flex flex-col justify-between group hover:border-blue-500 relative">
                     <div>
-                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
-                        <div class="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 font-bold text-[10px] rounded mb-3 uppercase tracking-wider">Эрх зүй</div>
-                        <h3 class="text-2xl font-bold mb-3 text-slate-800">AI - Гэрээ үүсгэх</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-6">Хууль тогтоомжид бүрэн нийцсэн, байгууллагын эрх ашгийг хамгаалсан гэрээний төслийг заалт нэг бүрээр боловсруулна.</p>
+                        <div class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 font-bold text-[9px] rounded mb-2 uppercase">Эрх зүй</div>
+                        <h3 class="text-base sm:text-xl font-bold mb-1.5 text-slate-800">AI - Гэрээ үүсгэх</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-4">Хууль тогтоомжид нийцсэн, эрх ашгийг хамгаалсан гэрээний төслийг заалтаар боловсруулна.</p>
                     </div>
-                    <ul class="space-y-2 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-600">
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Эрсдэлтэй заалтын хяналт</li>
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Талуудын эрх ашгийн тэнцвэр</li>
+                    <ul class="space-y-1.5 border-t border-slate-100 pt-3 text-[11px] font-semibold text-slate-600">
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Эрсдэлт заалтын хяналт</li>
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Тэнцвэртэй нөхцөл</li>
                     </ul>
                 </div>
 
-                <!-- Document Gen 3: Forms -->
-                <div class="card-light p-8 flex flex-col justify-between group hover:border-blue-500">
+                <!-- Document Gen 3 -->
+                <div class="card-light p-4 sm:p-6 flex flex-col justify-between group hover:border-blue-500">
                     <div>
-                        <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-3 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                         </div>
-                        <div class="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 font-bold text-[10px] rounded mb-3 uppercase tracking-wider">Стандартчилал</div>
-                        <h3 class="text-2xl font-bold mb-3 text-slate-800">AI - Маягт үүсгэх</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-6">Байгууллагын дотоод хэрэгцээнд зориулсан өргөдлийн маягт, асуулга, шалгалтын хяналтын хуудсуудыг автоматаар бэлтгэнэ.</p>
+                        <div class="inline-block px-2 py-0.5 bg-blue-100 text-blue-700 font-bold text-[9px] rounded mb-2 uppercase">Стандартчилал</div>
+                        <h3 class="text-base sm:text-xl font-bold mb-1.5 text-slate-800">AI - Маягт үүсгэх</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-4">Байгууллагын дотоод өргөдлийн маягт, шалгалтын хяналтын хуудсуудыг шууд бэлтгэнэ.</p>
                     </div>
-                    <ul class="space-y-2 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-600">
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Хяналтын баталгаажсан хуудас</li>
-                        <li class="flex items-center gap-2"><span class="text-blue-600 font-bold">✓</span> Хэрэглэхэд хялбар форматын дагуу</li>
+                    <ul class="space-y-1.5 border-t border-slate-100 pt-3 text-[11px] font-semibold text-slate-600">
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Баталгаажсан хуудас</li>
+                        <li class="flex items-center gap-1.5"><span class="text-blue-600 font-bold">✓</span> Хэрэглэхэд хялбар</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Slide 5: Pricing -->
-    <section class="slide" id="slide5">
-        <div class="max-w-5xl w-full px-6">
-            <h2 class="text-4xl font-extrabold mb-12 text-center">Үнийн мэдээлэл</h2>
-            <div class="flex flex-col md:flex-row gap-8 items-stretch">
-                <div class="flex-1 card-light p-10 border-blue-500 border-2 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-blue-600 text-white px-6 py-2 text-xs font-bold rounded-bl-3xl uppercase tracking-tighter">Сонгох</div>
-                    <h3 class="text-2xl font-bold mb-2">Compliance</h3>
-                    <div class="text-6xl font-black mb-8 text-blue-600">350,000₮<span class="text-lg font-normal text-slate-400">/сар</span></div>
-                    <ul class="space-y-4 mb-10 text-sm">
-                        <li class="flex items-start gap-3"><span class="text-blue-600 font-bold">✓</span> 50 Удаагийн иж бүрэн аудиттай тэнцэх GAP Analyze</li>
-                        <li class="flex items-start gap-3"><span class="text-blue-600 font-bold">✓</span> Дүрэм, журам эрх зүйн актыг шинжлэх нэмэлт шийдлүүд</li>
-                        <li class="flex items-start gap-3"><span class="text-blue-600 font-bold">✓</span> Unlimited AI Toolbox</li>
+    <section class="slide px-4 py-8 sm:py-12 md:py-16 md:px-16" id="slide5">
+        <div class="max-w-4xl w-full my-auto pb-28 md:pb-0 animate-in">
+            <h2 class="text-2xl sm:text-4xl font-extrabold mb-4 sm:mb-8 text-center">Үнийн мэдээлэл</h2>
+            <div class="flex flex-col md:flex-row gap-4 sm:gap-6 items-stretch">
+                <!-- Main pricing plan -->
+                <div class="flex-1 card-light p-5 sm:p-8 border-blue-500 border-2 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white px-4 py-1 text-[11px] font-bold rounded-bl-2xl uppercase tracking-tighter">Сонгох</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-1">Compliance</h3>
+                    <div class="text-3xl sm:text-5xl font-black mb-4 sm:mb-6 text-blue-600">350,000₮<span class="text-sm font-normal text-slate-400">/сар</span></div>
+                    <ul class="space-y-2 sm:space-y-3 mb-6 text-xs sm:text-sm">
+                        <li class="flex items-start gap-2.5"><span class="text-blue-600 font-bold">✓</span> 50 Удаагийн иж бүрэн аудиттай тэнцэх GAP Analyze</li>
+                        <li class="flex items-start gap-2.5"><span class="text-blue-600 font-bold">✓</span> Дүрэм, журам эрх зүйн актыг шинжлэх нэмэлт шийдлүүд</li>
+                        <li class="flex items-start gap-2.5"><span class="text-blue-600 font-bold">✓</span> Unlimited AI Toolbox</li>
                     </ul>
-                    <a href="https://mn.tuss.io/get-demo-mn" target="_blank" class="w-full blue-gradient text-white font-bold py-4 rounded-2xl hover:scale-[1.02] transition-transform shadow-lg shadow-blue-200 block text-center">Эхлэх</a>
+                    <a href="https://mn.tuss.io/get-demo-mn" target="_blank" class="w-full blue-gradient text-white font-bold py-3 sm:py-3.5 rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-transform shadow-md shadow-blue-200 block text-center text-sm sm:text-base">Эхлэх</a>
                 </div>
-                <div class="flex-1 flex flex-col gap-4">
-                    <div class="card-light p-6 flex justify-between items-center bg-blue-50 border-none">
+
+                <!-- Discount cards -->
+                <div class="flex-1 flex flex-col gap-3 sm:gap-4">
+                    <div class="card-light p-4 sm:p-5 flex justify-between items-center bg-blue-50 border-none">
                         <div>
-                            <span class="text-xs font-bold text-blue-600 uppercase bg-white px-2 py-0.5 rounded">10% OFF</span>
-                            <h4 class="text-lg font-bold mt-2">10+ compliance хэрэглэгчтэй байгууллагад</h4>
+                            <span class="text-[10px] font-bold text-blue-600 uppercase bg-white px-2 py-0.5 rounded border border-blue-100">10% OFF</span>
+                            <h4 class="text-xs sm:text-base font-bold mt-1.5">10+ compliance хэрэглэгчтэй байгууллагад</h4>
                         </div>
-                        <div class="text-3xl">🔥</div>
+                        <div class="text-2xl sm:text-3xl pl-3 shrink-0">🔥</div>
                     </div>
-                    <div class="card-light p-6 flex justify-between items-center border-blue-100">
+                    <div class="card-light p-4 sm:p-5 flex justify-between items-center border-blue-100">
                         <div>
-                            <span class="text-xs font-bold text-blue-600 uppercase bg-blue-50 px-2 py-0.5 rounded">18% OFF</span>
-                            <h4 class="text-lg font-bold mt-2">Жилээр төлөөд</h4>
+                            <span class="text-[10px] font-bold text-blue-600 uppercase bg-blue-50 px-2 py-0.5 rounded border border-blue-100">18% OFF</span>
+                            <h4 class="text-xs sm:text-base font-bold mt-1.5">Жилээр төлбөрөө хийвэл</h4>
                         </div>
-                        <div class="text-3xl">📅</div>
+                        <div class="text-2xl sm:text-3xl pl-3 shrink-0">📅</div>
                     </div>
-                    <div class="mt-auto p-4 text-center italic text-slate-400 text-sm">
+                    <div class="mt-auto p-2 text-center italic text-slate-400 text-xs sm:text-sm">
                         "Эрсдэлийг зардалд бус, үнэ цэнд шилжүүл."
                     </div>
                 </div>
@@ -572,28 +669,28 @@
         </div>
     </section>
 
-    <!-- Slide 6: Final Contact -->
-    <section class="slide" id="slide6">
-        <div class="text-center animate-in">
-            <div class="inline-block p-5 bg-blue-50 rounded-full mb-8 floating">
-                <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    <section class="slide px-4 py-8 sm:py-12 md:py-16 md:px-16" id="slide6">
+        <div class="max-w-2xl w-full text-center my-auto pb-28 md:pb-0 animate-in">
+            <div class="inline-block p-4 sm:p-5 bg-blue-50 rounded-full mb-6">
+                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
-            <h2 class="text-6xl font-black mb-8 leading-tight text-gradient">Эрсдэлийг зардалд бус,<br>үнэ цэнд шилжүүл.</h2>
+            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight text-gradient">Эрсдэлийг зардалд бус,<br>үнэ цэнд шилжүүл.</h2>
             
-            <div class="mt-12 flex flex-col items-center gap-6">
-                <a href="https://mn.tuss.io/get-demo-mn" target="_blank" class="flex items-center gap-4 bg-white px-10 py-5 rounded-3xl shadow-2xl border border-blue-50 hover:scale-105 transition-all pulse-blue">
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <div class="mt-8 flex flex-col items-center gap-4">
+                <a href="https://mn.tuss.io/get-demo-mn" target="_blank" class="w-full sm:w-auto flex items-center justify-center gap-3 bg-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-2xl shadow-xl border border-blue-100 hover:scale-105 active:scale-95 transition-all pulse-blue">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <span class="text-2xl font-black text-blue-600 px-4">Уулзалт товлох, мэдээлэл авах</span>
+                    <span class="text-xs sm:text-base md:text-lg font-black text-blue-600">Уулзалт товлох, мэдээлэл авах</span>
                 </a>
-                <div class="flex flex-col gap-2 mt-4">
-                    <div class="text-xl font-bold text-slate-600">+976 7014 9761</div>
-                    <div class="text-lg font-medium text-slate-400">tuss.io</div>
+                
+                <div class="flex flex-col gap-1 mt-3">
+                    <div class="text-base sm:text-lg font-bold text-slate-700">+976 7014 9761</div>
+                    <div class="text-xs sm:text-sm font-medium text-slate-400">tuss.io</div>
                 </div>
             </div>
             
-            <footer class="mt-32 text-slate-400 font-medium">
+            <footer class="mt-10 sm:mt-12 text-slate-400 text-xs font-medium">
                 © 2026 Tussio AI Compliance - All Rights Reserved
             </footer>
         </div>
@@ -611,28 +708,38 @@
             const activeSlide = document.getElementById(`slide${currentSlide}`);
             if (activeSlide) {
                 activeSlide.classList.add('active');
+                // Scroll top of slide on mobile when switching
+                activeSlide.scrollTop = 0;
             }
             
             // Update progress bar
             const progress = (currentSlide / totalSlides) * 100;
             document.getElementById('progressIndicator').style.width = `${progress}%`;
 
-            // Update button states
+            // Update slide counter
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+
+            // Update desktop button states
             document.getElementById('prevBtn').classList.toggle('disabled', currentSlide === 1);
             document.getElementById('nextBtn').classList.toggle('disabled', currentSlide === totalSlides);
 
-            // Analysis ring animation
+            // Update mobile button states
+            document.getElementById('mobilePrevBtn').classList.toggle('disabled', currentSlide === 1);
+            document.getElementById('mobileNextBtn').classList.toggle('disabled', currentSlide === totalSlides);
+
+            // Analysis ring animation on slide 2
             if (currentSlide === 2) {
                 const ring = document.getElementById('scoreRing');
                 if (ring) {
-                    ring.style.strokeDashoffset = '251.2';
+                    ring.style.strokeDashoffset = '163.3';
                     setTimeout(() => {
-                        ring.style.strokeDashoffset = '45.2'; 
-                    }, 100);
+                        // 82% of 163.3
+                        ring.style.strokeDashoffset = '29.4'; 
+                    }, 150);
                 }
             }
 
-            // Restart animations
+            // Restart animations in the active slide
             if (activeSlide) {
                 const animatedElements = activeSlide.querySelectorAll('.animate-in');
                 animatedElements.forEach(el => {
@@ -643,14 +750,57 @@
             }
         }
 
-        function nextSlide() { if (currentSlide < totalSlides) { currentSlide++; updateSlide(); } }
-        function prevSlide() { if (currentSlide > 1) { currentSlide--; updateSlide(); } }
+        function nextSlide() { 
+            if (currentSlide < totalSlides) { 
+                currentSlide++; 
+                updateSlide(); 
+            } 
+        }
 
+        function prevSlide() { 
+            if (currentSlide > 1) { 
+                currentSlide--; 
+                updateSlide(); 
+            } 
+        }
+
+        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
+        // Touch swipe handling for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            // Ensure horizontal swipe is dominant (not vertical page scroll)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 45) {
+                if (diffX > 0) {
+                    nextSlide(); // Swiped left -> next
+                } else {
+                    prevSlide(); // Swiped right -> prev
+                }
+            }
+        }
+
+        // Initial setup
         updateSlide();
     </script>
 </body>
